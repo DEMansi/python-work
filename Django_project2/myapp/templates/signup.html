@@ -1,0 +1,158 @@
+{% extends 'header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		span{
+			color: red;
+		}
+	</style>
+	<script type="text/javascript">
+	     function checkFname()
+	     {
+           var f=document.signup.fname.value;
+           var reg=/^[A-Za-z]+$/;
+           if(f=="")
+           {
+           	   document.getElementById("fname").innerHTML="Please Enter First Name";
+           }
+           else if(!reg.test(f))
+           {
+           	  document.getElementById("fname").innerHTML="Please Enter Only Alphabets";
+           }
+           else
+           {
+           	   document.getElementById("fname").innerHTML="";
+           }
+	     }
+	     function checkEmail()
+	     {
+	     	
+           var f=document.signup.email.value;
+           var reg=/^[A-Za-z0-9-_.]+@[A-Za-z]+\.[A-Za-z]{2,4}$/;
+           if(f=="")
+           {
+           	   document.getElementById("email").innerHTML="Please Enter Email";
+           }
+           else if(!reg.test(f))
+           {
+           	  document.getElementById("email").innerHTML="Please Enter Valid Email";
+           }
+           else
+           {
+           	   document.getElementById("email").innerHTML="";
+           }
+	     }
+	    /* function checkMobile()
+	     {
+           var f=document signup.mobile.value;
+           var reg=/^\d{10}$/;
+           if(f=="")
+           {
+           	   document.getElementById("mobile").innerHTML="Please Enter Mobile";
+           }
+           else if(!reg.test(f))
+           {
+           	  document.getElementById("mobile").innerHTML="Please Enter 10 Digits Only";
+           }
+           else
+           {
+           	   document.getElementById("mobile").innerHTML="";
+           }
+	     }
+	     function checkPassword()
+	     {
+           var f=document signup.password.value;
+           var reg=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+           if(f=="")
+           {
+           	   document.getElementsById("password").innerHTML="Please Enter Password";
+           }
+           else if(!reg.test(f))
+           {
+           	  document.getElementsById("password").innerHTML="min 1 Upper, Lower, Special & Numeric(8,15)";
+           }
+           else
+           {
+           	   document.getElementsById("password").innerHTML="";
+           }
+	     }
+	     function checkCPassword()
+	     {
+           var p1=document signup.password.value;
+           var p2=document signup.cpassword.value;
+
+           if(p2=="")
+           {
+           	   document.getElementsById("cpassword").innerHTML="Please Enter  Confirm Password";
+           }
+           else if(p1!=p2)
+           {
+           	  document.getElementsById("cpassword").innerHTML=" password &  Confirm Password Does Not Matched";
+           }
+           else
+           {
+           	   document.getElementsById("password").innerHTML="";
+           }
+	     }*/
+	     </script>
+</head>
+<body>
+<center>
+<h1>Welcome To My Signup</h1>
+{% if msg %}
+   <b style="color: blue;">{{msg}}</b>
+   {% endif %}
+<form name="signup" method="post" action="">
+	{% csrf_token %}
+	<table>
+		<tr>
+			<td>First Name</td>
+			<td><input type="text" name="fname" onblur="checkFname();"></td>
+			<td><span id="fname"></span></td>
+		</tr>
+		<tr>
+			<td>Last Name</td>
+			<td><input type="text" name="lname"></td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td><input type="text" name="email" onblur="checkEmail();"></td>
+			<td><span id="email"></span></td>
+		</tr>
+		<tr>
+			<td>Mobile</td>
+			<td><input type="text" name="mobile" onblur="checkmobile();"></td>
+			<td><span id="mobile"></span></td>
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td><textarea rows="5" cols="21" name="address"></textarea></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="password" name="password" onblur="checkPassword();"></td>
+			<td><span id="password"></span></td>
+		</tr>
+		<tr>
+			<td>Confirm Password</td>
+			<td><input type="password" name="cpassword" onblur="checkCPassword();"></td>
+			<td><span id="cpassword"></span></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<input type="submit" name="action" value="Sign Up" class="btn btn-primary">
+			</td>
+		</tr>
+
+	</table>
+	
+</form>
+</center>
+</body>
+</html>
+{% endblock %}
