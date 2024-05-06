@@ -1,83 +1,61 @@
-class QuizGame:
-    def __init__(self):
-        self.questions = []
+def display_menu():
 
-    def add_question(self, question, answer):
-        """Add a new question to the quiz"""
-        self.questions.append({"question": question, "answer": answer})
-        print("Question added successfully!")
+    print("Welcome To Tops Quiz Gaming Challange")
+    print("-------------------------------------------------------------\n")
+    print("\nSelect Your Role : ")
 
-    def view_questions(self):
-        """View all questions in the quiz"""
-        if not self.questions:
-            print("No questions available.")
-        else:
-            print("Quiz Questions:")
-            for idx, q in enumerate(self.questions, 1):
-                print(f"{idx}. {q['question']}")
+    print("\n1.Quiz Master")
+    print("\n2.Quiz Craker")
+    role=int(input("\nEnter Your Role : "))
+    if role==1:
+        print("\nWelcome Master")
+        print("\nShake Your Brain And Add Some Challanging Questions...")
+        print("-------------------------------------------------------------\n")
+        d1={}
+        while True:
+            print("*****Display Menu****")
+            print("\n1.Add Questions")
+            print("\n2.View Questions")
+            print("\n3.Delete Questions")
+            print("\n4.Exit")
+            
+            choice=int(input("Which Operation You Want To Perform : "))
+            if choice==1:
 
-    def update_question(self, idx, new_question, new_answer):
-        """Update an existing question"""
-        if 1 <= idx <= len(self.questions):
-            self.questions[idx - 1] = {"question": new_question, "answer": new_answer}
-            print("Question updated successfully!")
-        else:
-            print("Invalid question index.")
+                #Add Question
+                
+                 question = input("Enter the question: ")         
+                 option_a = input("Enter option A: ")
+                 option_b = input("Enter option B: ")
+                 answer=input("Enter Correct Answer : ")
+                 d1[question]={"A":option_a,"B":option_b,"answer":answer}
+                 print("Question Add Successfully!!!")
 
-    def delete_question(self, idx):
-        """Delete an existing question"""
-        if 1 <= idx <= len(self.questions):
-            del self.questions[idx - 1]
-            print("Question deleted successfully!")
-        else:
-            print("Invalid question index.")
+            elif choice==2:
 
-    def start_game(self):
-        """Start the quiz game"""
-        if not self.questions:
-            print("No questions available to start the game.")
-            return
+                #view Question
 
-        print("Quiz Game Started!")
-        score = 0
-        for idx, q in enumerate(self.questions, 1):
-            print(f"Question {idx}: {q['question']}")
-            user_answer = input("Your Answer: ").strip().lower()
-            if user_answer == q['answer'].lower():
-                print("Correct!")
-                score += 1
-            else:
-                print("Incorrect!")
-        print(f"Game Over! Your Score: {score}/{len(self.questions)}")
+                if len(d1) > 0:
+                    for key,value in d1.items():
+                        print(key, " : ", value)
+                else:
+                    print("No questions available to view.")
 
+            elif choice==3:
+                #Delete Questions
+                if len(d1) > 0:
+                    key = input("Enter the question to delete: ")
+                    if key in d1:
+                        d1.pop(key)
+                        print("Question deleted successfully!")
+                    else:
+                        print("Question not found!")
+                else:
+                    print("No questions available to delete.")
 
-def main():
-    quiz = QuizGame()
+            elif choice==4:
+                #Exit
+                print("Thank you!!!!")
+                break
 
-    while True:
-        print("\n===== Quiz Game Menu =====")
-        print("1. Add Question")
-        print("2. View Questions")
-        print("3. Delete Question")
-        print("4. Exit")
-
-        choice = input("Enter your choice: ")
-
-        if choice == '1':
-            question = input("Enter the question: ")
-            answer = input("Enter the answer: ")
-            quiz.add_question(question, answer)
-        elif choice == '2':
-            quiz.view_questions()
-        elif choice == '3':
-            idx = int(input("Enter the question index to delete: "))
-            quiz.delete_question(idx)
-        elif choice == '4':
-            print("Exiting the program.")
-            break
-        else:
-            print("Invalid choice. Please try again.")
-
-
-if __name__ == "__main__":
-    main()
+display_menu()
